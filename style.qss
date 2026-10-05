@@ -1,0 +1,21 @@
+QWidget {
+    background-color: #FFFFFF;
+    color: #33264A;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+}
+
+QTableWidget {
+    background-color: #FFFFFF;
+    border: 1px solid #D8CEE8;
+    gridline-color: #F1EDF8;
+    color: #33264A;
+}
+
+QHeaderView::section {
+    background-color: #F4EFFC;
+    color: #5C4582;
+    padding: 6px;
+    font-weight: bold;
+    border: 1px solid #EBE4F3;
+}
