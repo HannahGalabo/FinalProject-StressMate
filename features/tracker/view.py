@@ -89,7 +89,6 @@ class TrackerView(QWidget):
 
         header = QHBoxLayout()
         logo_lbl = QLabel()
-        
         logo_lbl.setStyleSheet("background: transparent; border: none;")
         
         logo_path = self.find_asset(["logo.png", "menu_logo.png"])
@@ -112,12 +111,12 @@ class TrackerView(QWidget):
             QTabBar::tab:selected { background: #FFFFFF; color: #33264A; border-top: 4px solid #6C5297; border-bottom: none; }
         """)
 
-        self.tabs.addTab(self.build_log_tab(), "1. Log Stress")
-        self.tabs.addTab(self.build_history_tab(), "2. Stress History")
-        self.tabs.addTab(self.build_guides_tab(), "3. Guides & Tasks")
-        self.tabs.addTab(self.build_quotes_tab(), "4. Quotes")
-        self.tabs.addTab(self.build_help_tab(), "5. Get Help")
-        self.tabs.addTab(self.build_logout_tab(), "6. Log Out")
+        self.tabs.addTab(self.build_log_tab(), "Log Stress")
+        self.tabs.addTab(self.build_history_tab(), "Stress History")
+        self.tabs.addTab(self.build_guides_tab(), "Stress Level Guide")
+        self.tabs.addTab(self.build_quotes_tab(), "Quotes")
+        self.tabs.addTab(self.build_help_tab(), "Get Help")
+        self.tabs.addTab(self.build_logout_tab(), "Log Out")
 
         layout.addWidget(self.tabs)
         return page
@@ -137,7 +136,7 @@ class TrackerView(QWidget):
         left_lay.addWidget(title)
 
         self.level_dropdown = QComboBox()
-        self.level_dropdown.addItems(["Level Green", "Level Yellow", "Level Orange", "Level Red"])
+        self.level_dropdown.addItems(["🟢Level Green", "🟡Level Yellow", "🟠Level Orange", "🔴Level Red"])
         self.level_dropdown.setStyleSheet("QComboBox { padding: 10px; font-size: 15px; font-weight: bold; font-family: 'Georgia', serif; border: 2px solid #D8CEE8; border-radius: 6px; background: white; }")
         self.level_dropdown.currentTextChanged.connect(self.update_log_preview)
         left_lay.addWidget(self.level_dropdown)
@@ -146,7 +145,7 @@ class TrackerView(QWidget):
         self.preview_card.setWordWrap(True)
         left_lay.addWidget(self.preview_card)
 
-        left_lay.addWidget(QLabel("<b style='font-family: Georgia, serif; font-size: 14px;'>Add a short note / reflection (Optional):</b>"))
+        left_lay.addWidget(QLabel("<b style='font-family: Georgia, serif; font-size: 14px;'>Add a short note / reflection:</b>"))
         self.note_input = QTextEdit()
         self.note_input.setFixedHeight(85)
         self.note_input.setPlaceholderText("Write what's on your mind, or leave blank...")
@@ -170,7 +169,16 @@ class TrackerView(QWidget):
         return w
 
     def update_log_preview(self):
-        selected = self.level_dropdown.currentText()
+        raw_selected = self.level_dropdown.currentText()
+        
+        label_map = {
+            "🟢Level Green": "Level Green",
+            "🟡Level Yellow": "Level Yellow",
+            "🟠Level Orange": "Level Orange",
+            "🔴Level Red": "Level Red"
+        }
+        selected = label_map.get(raw_selected, "Level Green")
+
         tier = self.service.get_tier_by_label(selected)
 
         text = (
@@ -192,14 +200,23 @@ class TrackerView(QWidget):
             self.level_img_label.setStyleSheet("font-family: 'Georgia', serif; color: #6C5297;")
 
     def handle_save_entry(self):
-        selected = self.level_dropdown.currentText()
+        raw_selected = self.level_dropdown.currentText()
+        
+        label_map = {
+            "🟢Level Green": "Level Green",
+            "🟡Level Yellow": "Level Yellow",
+            "🟠Level Orange": "Level Orange",
+            "🔴Level Red": "Level Red"
+        }
+        selected = label_map.get(raw_selected, "Level Green")
+        
         note = self.note_input.toPlainText()
         uid = self.auth_service.current_user.id
         self.service.log_stress(uid, selected, note)
         self.note_input.clear()
         self.refresh_table()
         QMessageBox.information(self, "Success", "Your stress level and task have been recorded!")
-
+        
     def build_history_tab(self):
         w = QWidget()
         lay = QVBoxLayout(w)
@@ -351,8 +368,12 @@ class TrackerView(QWidget):
             btn = QPushButton(f"Quote {i}")
             btn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
             btn.setStyleSheet("QPushButton { background: #FAF8FD; border: 1.5px solid #D8CEE8; color: #5C4582; font-weight: bold; font-family: 'Georgia', serif; padding: 8px 12px; border-radius: 6px; } QPushButton:hover { background: #6C5297; color: white; }")
-            fname = f"quote{i}.png"
-            qpath = os.path.join(quotes_dir, fname)
+            
+            # Checks for .png first, and if it's missing, switches to .jpg
+            qpath = os.path.join(quotes_dir, f"quote{i}.png")
+            if not os.path.exists(qpath):
+                qpath = os.path.join(quotes_dir, f"quote{i}.jpg")
+                
             btn.clicked.connect(lambda checked, p=qpath, idx=i: self.display_quote_image(p, idx))
             album_layout.addWidget(btn)
 
@@ -401,7 +422,6 @@ class TrackerView(QWidget):
 
         self.help_display = QLabel()
         self.help_display.setWordWrap(True)
-        
         self.help_display.setAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
         self.help_display.setStyleSheet("background: rgba(255, 255, 255, 0.95); border: 2px solid #6C5297; border-radius: 12px; padding: 30px; font-family: 'Georgia', serif; font-size: 20px; line-height: 1.8; color: #1A202C;")
         
