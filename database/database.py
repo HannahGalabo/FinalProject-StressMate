@@ -33,4 +33,4 @@ class DatabaseConnection:
             )
         """)
         conn.commit()
-        conn.close()
+        conn.close() 

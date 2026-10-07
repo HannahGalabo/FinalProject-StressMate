@@ -83,7 +83,7 @@ class AuthView(QWidget):
         lay.setContentsMargins(0, 0, 0, 0)
         lay.setSpacing(8)
 
-        title = QLabel("Log in to access the application.")
+        title = QLabel("Log in to access the application")
         title.setStyleSheet("color: #1A202C; font-size: 13px; font-weight: 600; border: none;")
         lay.addWidget(title)
 

@@ -8,7 +8,8 @@ class StressRepository:
         conn = self.db_conn.get_connection()
         cursor = conn.cursor()
         cursor.execute("""
-            INSERT INTO stress_logs (user_id, timestamp, level_code, task, note)
+            INSERT INTO stress_logs (user_id, timestamp, 
+            level_code, task, note)
             VALUES (?, ?, ?, ?, ?)
         """, (record.user_id, record.timestamp, record.level_code, record.task, record.note))
         conn.commit()

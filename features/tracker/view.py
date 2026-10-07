@@ -13,7 +13,7 @@ class TrackerView(QWidget):
         super().__init__()
         self.service = service
         self.auth_service = auth_service
-        self.setWindowTitle("StressMate - Daily Wellness Companion")
+        self.setWindowTitle("StressMate - Daily Stress Tracker")
         self.resize(1000, 740)
 
         self.root_layout = QVBoxLayout(self)
@@ -107,8 +107,12 @@ class TrackerView(QWidget):
         self.tabs = QTabWidget()
         self.tabs.setStyleSheet("""
             QTabWidget::pane { border: none; background: rgba(255, 255, 255, 0.95); border-radius: 8px; }
-            QTabBar::tab { background: #FFFFFF; color: #5C4582; font-family: 'Georgia', serif; font-weight: bold; font-size: 14px; padding: 12px 18px; margin-right: 2px; border-top-left-radius: 6px; border-top-right-radius: 6px; border: 1px solid #D8CEE8; }
-            QTabBar::tab:selected { background: #FFFFFF; color: #33264A; border-top: 4px solid #6C5297; border-bottom: none; }
+            QTabBar::tab { background: #FFFFFF; color: #5C4582; font-family: 'Georgia', serif; font-weight: 
+            bold; font-size: 14px; padding: 12px 18px; 
+            margin-right: 2px; border-top-left-radius: 6px; 
+            border-top-right-radius: 6px; border: 1px solid #D8CEE8; }
+            QTabBar::tab:selected { background: #FFFFFF; color: #33264A; 
+            border-top: 4px solid #6C5297; border-bottom: none; }
         """)
 
         self.tabs.addTab(self.build_log_tab(), "Log Stress")

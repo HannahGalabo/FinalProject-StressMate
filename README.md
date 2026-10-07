@@ -33,7 +33,6 @@ With the increasing demands of academic and professional life, many individuals 
 * **`/features/`**: The core directory utilizing a layered Object-Oriented Programming (OOP) architecture. It is divided into two main domains: `authentication` and `tracker`.
   * Inside each feature, the code is cleanly separated into `model.py` (data structures), `repository.py` (database queries), `service.py` (business logic and validation), and `view.py` (PyQt6 UI rendering).
 * **`main.py`**: The central entry point and orchestrator of the application. It initializes the database, connects the services, and uses a `QStackedWidget` to manage screen transitions.
-* **`style.qss`**: The global stylesheet file that applies unified CSS-like styling (colors, fonts, borders) across all PyQt widgets in the application.
 ## 7. Installation and Setup
 **Dependencies:** 
 * `PyQt6`[cite: 14]
@@ -69,10 +68,9 @@ With the increasing demands of academic and professional life, many individuals 
   * **Delete:** Removing a stress log from the history table.
 
 ## 11. Screenshots
-*(Note: Replace the links below with actual image files if required by your instructor)*[cite: 14]
-* `[Insert Login Screenshot Here]` - The secure authentication screen[cite: 14].
-* `[Insert Tracker Screenshot Here]` - The main stress logging dashboard[cite: 14].
-* `[Insert History Screenshot Here]` - The data table showing CRUD operations[cite: 14].
+* ![Secure Authentication Screen](assets/login_screen.png) - The secure authentication screen.
+* ![Main Stress Logging Dashboard](assets/stress_log.png) - The main stress logging dashboard.
+* ![CRUD Operations Data Table](assets/CRUD_operations.png) - The data table showing CRUD operations.
 
 ## 12. Testing
 * **Test 1: Password Validation**[cite: 14]
@@ -88,4 +86,4 @@ With the increasing demands of academic and professional life, many individuals 
 
 ## 14. Author
 * **Name:** Hannah Galabo[cite: 14]
-* **Section:** CS26L - 
+* **Section:** CS26L - 3581
