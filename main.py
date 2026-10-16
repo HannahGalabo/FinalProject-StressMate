@@ -1,12 +1,17 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget
+
+from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QStackedWidget
+
 from database.database import DatabaseConnection
 from features.authentication.repository import AuthRepository
 from features.authentication.service import AuthService
 from features.authentication.view import AuthView
+from features.faq.view import FaqChatBox
+from features.navigation.next_button import NextPageButton   
 from features.tracker.repository import StressRepository
 from features.tracker.service import StressService
 from features.tracker.view import TrackerView
+
 
 class StressMateMainWindow(QMainWindow):
     def __init__(self):
@@ -30,7 +35,23 @@ class StressMateMainWindow(QMainWindow):
         self.tracker_view = TrackerView(self.stress_service, self.auth_service)
         self.central_stack.addWidget(self.tracker_view)
 
+        self.next_button = None
+        start_button = self._find_start_button()
+        if start_button is not None:
+            self.next_button = NextPageButton(self, start_button)
+        else:
+            print("Could not find the 'HOW ARE YOU FEELING TODAY?' button.")
+
+        self.faq_box = FaqChatBox(self)
+
         self.show_login()
+
+    def _find_start_button(self):
+        """Find the dashboard's 'HOW ARE YOU FEELING TODAY?' button by its text."""
+        for button in self.tracker_view.findChildren(QPushButton):
+            if "feeling today" in button.text().lower():
+                return button
+        return None
 
     def show_login(self):
         self.central_stack.setCurrentIndex(0)
@@ -38,6 +59,7 @@ class StressMateMainWindow(QMainWindow):
     def show_tracker(self):
         self.tracker_view.start_user_session()
         self.central_stack.setCurrentIndex(1)
+
 
 def main():
     app = QApplication(sys.argv)
@@ -50,6 +72,7 @@ def main():
     window = StressMateMainWindow()
     window.show()
     sys.exit(app.exec())
+
 
 if __name__ == "__main__":
     main()
