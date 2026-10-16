@@ -4,7 +4,7 @@
 
 StressMate is an interactive application designed to help users track their daily stress levels, reflect on their emotions through journaling, and receive actionable coping strategies tailored to their current mental state.
 
-With the increasing demands of academic and professional life, many individuals experience burnout and anxiety without knowing how to pause or manage it. StressMate provides an organized space to log feelings and offering instant grounding techniques (like the 4-7-8 breathing method or micro-tasks) to intercept extreme stress before it escalates.
+With the increasing demands of academic and professional life, many individuals experience burnout and anxiety without knowing how to pause or manage it. StressMate provides an organized space to log feelings and offering techniques (like the 4-7-8 breathing method or micro-tasks) to intercept extreme stress before it escalates.
 
 ## 2. Project Objectives
 
@@ -15,13 +15,12 @@ With the increasing demands of academic and professional life, many individuals 
 
 ## 3. Features
 
-- **Secure User Authentication:** A robust login and registration system featuring strict password validation (minimum length, uppercase, and numerical requirements) and secure SHA-256 password hashing.
+- **Secure User Authentication:** A login and registration system featuring strict password validation (minimum length, uppercase, and numerical requirements) and secure SHA-256 password hashing.
 - **Interactive Stress Logging:** Users can categorize their current stress into four color-coded tiers and add personal reflection notes to record their daily mental state.
-- **History Management (CRUD):** Users can seamlessly view, update, and delete their past stress logs in a structured data table.
+- **History Management (CRUD):** Users can view, update, and delete their past stress logs in a structured data table.
 - **Coping & Support Resources:** Dedicated informative modules broken down into Physical, Emotional, and Spiritual help, providing specific grounding techniques and actionable advice.
 - **Inspirational Quotes Album:** An interactive image gallery providing users with uplifting quotes and visual encouragement.
-- **Stress FAQ Chat Box:** A floating chat box in the bottom-right corner of every screen. Users tap one of five common questions (signs of stress, quick ways to calm down, whether all stress is bad, stress and sleep, and when to seek professional help) and get an instant answer in a chat-style reply. It uses pre-written answers, so it works offline and needs no AI or internet connection.
-- **"Next Page" Guide Button:** A glowing call-to-action button at the bottom center of the dashboard ("Click here to go to the next page") that shows new users exactly where to click next. It appears only on the dashboard and triggers the same action as the "HOW ARE YOU FEELING TODAY?" button.
+- **Stress FAQ Chat Box:** A chat box in the bottom-right corner of every screen. Users tap one of five common questions and get an answer in a chat-style reply. It uses pre-written answers, so it works offline and needs no AI or internet connection.
 
 ## 4. Emergency & Support Resources
 
